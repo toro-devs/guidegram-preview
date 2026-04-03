@@ -1,88 +1,86 @@
 <div align="center">
+  <img src="logo guidegram.png" alt="Guidegram Logo" width="120" />
 
-  <!-- Логотип / баннер -->
-  <img src="./logo%20guidegram.png" alt="Guidegram Logo" width="80%" />
+  # Guidegram
 
-  <br><br>
+  ### Telegram commerce bot for selling digital products
 
-  <!-- Заголовок -->
-  <h1>Guidegram 🤖</h1>
-  <h3>Ваш личный Telegram-бот для продажи цифровых продуктов</h3>
+  [![Made with grammY](https://img.shields.io/badge/Made%20with-grammY-00BFFF?logo=telegram)](https://grammy.dev)
+  [![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+  [![Payments Ready](https://img.shields.io/badge/Payments-YooKassa%20%7C%20Robokassa-brightgreen)](https://yookassa.ru)
+  [![CI/CD](https://img.shields.io/badge/CI%2FCD-automated-blue)](https://github.com)
 
-  <p>
-    Быстрая настройка · Простые платежи · Статистика и рассылки
-  </p>
-
-  <br>
-
-  <!-- Бейджи -->
-  <p>
-    <img src="https://img.shields.io/badge/Made%20with-grammY-00BFFF?logo=telegram" alt="Made with grammY" />
-    <img src="https://img.shields.io/badge/Payments-Ready-brightgreen" alt="Payments Ready" />
-    <img src="https://img.shields.io/badge/Support-Yes-blue" alt="Support Included" />
-  </p>
+  
   <img src="https://www.evilsocket.net/images/human-coded.png" height="30px" alt="This project is 100% made by humans."/>
+
+  *Built solo. Shipped to production. End-to-end ownership.*
 
 </div>
 
 ---
 
-<h2>🚀 Что это такое?</h2>
-<p>
-  <b>Guidegram</b> — это Telegram-бот, который помогает авторам зарабатывать на своём контенте без сайтов и сложных сервисов.
-  Вы сможете продавать <b>гайды, чек-листы, курсы, коллекции файлов и любые цифровые продукты</b> прямо в Telegram.
-</p>
+## What it does
+
+Guidegram lets content creators sell guides, checklists, courses, and any digital files directly through Telegram — no website needed, no third-party platforms, full payment control.
+
+- Buyers browse, pay, and receive files — all within Telegram
+- Full paywall: payment link → webhook confirmation → gated delivery
+- Discount system and segmented broadcasts for owners
+
+> This is a preview repository. The production codebase is private.
 
 ---
 
-<h2>✨ Возможности</h2>
-<ul>
-  <li>📦 Создание продуктов прямо в боте</li>
-  <li>💳 Поддержка Telegram Payments и внешних провайдеров (Robokassa и др.)</li>
-  <li>📊 Встроенная статистика продаж и аудитории</li>
-  <li>📬 Рассылки клиентам</li>
-  <li>⚡ Быстрая установка на ваш сервер (Ansible)</li>
-  <li>🔒 Все данные остаются только у вас</li>
-</ul>
+## Technical highlights
+
+**Payment integration**
+Full paywall logic on top of YooKassa and Robokassa APIs:
+- Generate payment links per order
+- Handle async webhook confirmation
+- Gate content delivery until payment is verified
+
+**Broadcast system**
+Segmented messaging — target all users or buyers of a specific product. Built on BullMQ for reliable async job processing.
+
+**Infrastructure**
+Fully self-hosted. Automated CI/CD — server provisioning, build pipeline, domain setup, zero-downtime deploys.
 
 ---
 
-<h2>⚙️ Как это работает?</h2>
-<ol>
-  <li>Я устанавливаю бота на ваш сервер</li>
-  <li>Настраиваю базу данных и платежного провайдера</li>
-  <li>Вы добавляете свои продукты прямо в боте</li>
-  <li>Получаете оплату и мгновенно отправляете материалы клиентам</li>
-</ol>
+## Stack
+
+| Layer | Technology |
+|---|---|
+| Bot framework | grammY |
+| Language | TypeScript |
+| API layer | Hono |
+| Database | PostgreSQL |
+| Cache / queues | Redis + BullMQ |
+| Deployment | CI/CD, VPS |
 
 ---
 
-<h2>👩‍🎨 Для кого подходит?</h2>
-<ul>
-  <li>Блогеры и эксперты</li>
-  <li>Авторы гайдов и чек-листов</li>
-  <li>Наставники и коучи</li>
-  <li>Подкастеры, музыканты и креаторы</li>
-  <li>Любой, кто хочет продавать цифровые продукты напрямую своей аудитории</li>
-</ul>
+## Architecture overview
+
+```
+User (Telegram)
+      │
+      ▼
+  grammY Bot
+      │
+      ├── Product catalog
+      ├── Payment flow ──► YooKassa / Robokassa
+      │         │
+      │         └── Webhook handler ──► Verify ──► Deliver product
+      │
+      ├── Discount engine
+      └── Broadcast system ──► BullMQ ──► Segmented delivery
+```
 
 ---
 
-<h2>📸 Скриншоты</h2>
+<div align="center">
 
----
+Built by [Aleksey Bykovskii](https://www.linkedin.com/in/aybykovskii/) — architecture, implementation, infrastructure, and deployment.
 
-<h2>💡 Как получить бота?</h2>
-<p>
-  Напишите мне в Telegram:  
-  <a href="https://t.me/aybykovskii" target="_blank"><b>@aybykovskii</b></a><br>
-  Я установлю и настрою бота под ваши задачи, помогу с запуском и обеспечу поддержку.
-</p>
-
----
-
-<h2>📄 Лицензия</h2>
-<p>
-  © 2025 Aleksei Bykovskii. All rights reserved.<br>
-  Код бота приватный. Этот репозиторий используется только как превью продукта.
-</p>
+</div>
